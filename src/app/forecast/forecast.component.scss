@@ -1,0 +1,24 @@
+.container {
+  .card {
+  background-color: #61a5ff;
+  color: #ffffff;
+  .card-header {
+    .btn-header-link {
+      &:after {
+        content: "\02C5";
+        float: right;
+      }
+      &.collapsed:after {
+        content: "\02C4";
+      }
+    }
+  }
+  .list-group-item {
+    background-color: #61a5ff;
+    color: #ffffff;
+  }
+}
+}
+// .btn-header-link{
+//   width: 100%;
+// }

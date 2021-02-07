@@ -1,0 +1,167 @@
+<div class="container">
+
+  <!-- <div class="card-header">
+    {{pageTitle}}
+  </div> -->
+
+  <div class="row" *ngIf="(forecasts$ | async)|| {}; let forecasts">
+    <div class="col accordion" id="cityForecast">
+      {{forecasts?.city?.name}}
+      <button (click)="currentLoc()">Current Location</button>
+      <br><br>
+      <div class="card">
+        <div class="card-header" id="section1head">
+          <button class="btn btn-header-link w-100" data-toggle="collapse" data-target="#section1" aria-expanded="true"
+            aria-controls="section1">
+            Today({{today|date}})
+          </button>
+        </div>
+        <div id="section1" class="collapse show" aria-labelledby="section1head" data-parent="#cityForecast">
+          <div class="card-body">
+            <span *ngFor="let listup1 of forecasts?.list">
+              <ul class="list-group" *ngIf="(today|date) === (listup1?.dt_txt | date)">
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      {{listup1?.dt_txt | date:'shortTime'}}
+                    </div>
+                    <span class="col-lg-3 col-6" *ngFor="let weather of listup1?.weather">
+                      <img src="" [src]="'http://openweathermap.org/img/wn/'+weather?.icon+'.png'"
+                        [alt]="weather?.description" [title]="weather?.description">
+                    </span>
+                    <div class="col-lg-3 col-6">
+                      <small>Wind</small>
+                      <br>
+                      {{listup1?.wind.speed}}
+                    </div>
+                    <div class="col-lg-3 col-6">
+                      <small>Temp</small>
+                      <br>
+                      {{listup1?.main.temp}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <div class="card">
+        <div class="card-header" id="section2head">
+          <button class="btn btn-header-link w-100" data-toggle="collapse" data-target="#section2" aria-expanded="true"
+            aria-controls="section2">
+            Tomorrow({{tomorrow|date}})
+          </button>
+        </div>
+        <div id="section2" class="collapse" aria-labelledby="section2head" data-parent="#cityForecast">
+          <div class="card-body">
+            <span *ngFor="let listup2 of forecasts?.list">
+              <ul class="list-group" *ngIf="(tomorrow|date) === (listup2?.dt_txt | date)">
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      {{listup2?.dt_txt | date:'shortTime'}}
+                    </div>
+                    <span class="col-lg-3 col-6" *ngFor="let weather of listup2?.weather">
+                      <img src="" [src]="'http://openweathermap.org/img/wn/'+weather?.icon+'.png'"
+                        [alt]="weather?.description" [title]="weather?.description">
+                    </span>
+                    <div class="col-lg-3 col-6">
+                      <small>Wind</small>
+                      <br>
+                      {{listup2?.wind.speed}}
+                    </div>
+                    <div class="col-lg-3 col-6">
+                      <small>Temp</small>
+                      <br>
+                      {{listup2?.main.temp}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="section3head">
+          <button class="btn btn-header-link w-100" data-toggle="collapse" data-target="#section3" aria-expanded="true"
+            aria-controls="section3">
+            Day after Tomorrow({{thirdday|date}})
+          </button>
+        </div>
+        <div id="section3" class="collapse" aria-labelledby="section3head" data-parent="#cityForecast">
+          <div class="card-body">
+            <span *ngFor="let listup3 of forecasts?.list">
+              <ul class="list-group" *ngIf="(thirdday|date) === (listup3?.dt_txt | date)">
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      {{listup3?.dt_txt | date:'shortTime'}}
+                    </div>
+                    <span class="col-lg-3 col-6" *ngFor="let weather of listup3?.weather">
+                      <img src="" [src]="'http://openweathermap.org/img/wn/'+weather?.icon+'.png'"
+                        [alt]="weather?.description" [title]="weather?.description">
+                    </span>
+                    <div class="col-lg-3 col-6">
+                      <small>Wind</small>
+                      <br>
+                      {{listup3?.wind.speed}}
+                    </div>
+                    <div class="col-lg-3 col-6">
+                      <small>Temp</small>
+                      <br>
+                      {{listup3?.main.temp}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="section4head">
+          <button class="btn btn-header-link w-100" data-toggle="collapse" data-target="#section4" aria-expanded="true"
+            aria-controls="section4">
+            4th Day({{fourthday|date}})
+          </button>
+        </div>
+        <div id="section4" class="collapse" aria-labelledby="section4head" data-parent="#cityForecast">
+          <div class="card-body">
+            <span *ngFor="let listup4 of forecasts?.list">
+              <ul class="list-group" *ngIf="(fourthday|date) === (listup4?.dt_txt | date)">
+                <li class="list-group-item ">
+                  <div class="row">
+                    <div class="col-lg-3 col-6">
+                      {{listup4?.dt_txt | date:'shortTime'}}
+                    </div>
+                    <span class="col-lg-3 col-6" *ngFor="let weather of listup4?.weather">
+                      <img src="" [src]="'http://openweathermap.org/img/wn/'+weather?.icon+'.png'"
+                        [alt]="weather?.description" [title]="weather?.description">
+                    </span>
+                    <div class="col-lg-3 col-6">
+                      <small>Wind</small>
+                      <br>
+                      {{listup4?.wind.speed}}
+                    </div>
+                    <div class="col-lg-3 col-6">
+                      <small>Temp</small>
+                      <br>
+                      {{listup4?.main.temp}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>
+<br><br>
